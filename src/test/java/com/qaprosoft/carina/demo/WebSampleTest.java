@@ -17,6 +17,7 @@ package com.qaprosoft.carina.demo;
 
 import java.util.List;
 
+import com.qaprosoft.carina.core.foundation.webdriver.core.capability.impl.desktop.ChromeCapabilities;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;

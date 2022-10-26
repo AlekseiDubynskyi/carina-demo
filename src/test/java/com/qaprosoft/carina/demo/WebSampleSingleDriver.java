@@ -18,6 +18,10 @@ package com.qaprosoft.carina.demo;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.qaprosoft.carina.core.foundation.webdriver.core.capability.impl.desktop.ChromeCapabilities;
+import com.qaprosoft.carina.core.foundation.webdriver.core.capability.impl.desktop.SafariCapabilities;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
@@ -46,7 +50,7 @@ public class WebSampleSingleDriver implements IAbstractTest {
         // Open GSM Arena home page and verify page is opened
         homePage = new HomePage(getDriver());
     }
-    
+
     @Test
     @MethodOwner(owner = "qpsdemo")
     @TestLabel(name = "feature", value = {"web", "regression"})
@@ -80,8 +84,8 @@ public class WebSampleSingleDriver implements IAbstractTest {
     @TestLabel(name = "feature", value = {"web", "acceptance"})
     public void testCompareModels() {
         // Verify model announced dates
-        Assert.assertEquals(specs.get(0).readSpec(SpecType.ANNOUNCED), "2016, March 31");
-        Assert.assertEquals(specs.get(1).readSpec(SpecType.ANNOUNCED), "2015, June 19");
+        Assert.assertEquals(specs.get(0).readSpec(SpecType.ANNOUNCED), "2016, March 31. Released 2016, May 06");
+        Assert.assertEquals(specs.get(1).readSpec(SpecType.ANNOUNCED), "2015, June 19. Released 2015, July 28");
         Assert.assertEquals(specs.get(2).readSpec(SpecType.ANNOUNCED), "2017, June");
     }
 

@@ -8,7 +8,7 @@ import com.qaprosoft.carina.core.foundation.api.http.HttpMethodType;
 import com.qaprosoft.carina.core.foundation.api.http.HttpResponseStatusType;
 import com.qaprosoft.carina.core.foundation.utils.Configuration;
 
-@Endpoint(url = "${base_url}/api/users?page=1", methodType = HttpMethodType.GET)
+@Endpoint(url = "https://reqres.in/api/users?page=1", methodType = HttpMethodType.GET)
 @ResponseTemplatePath(path = "api/apiTest/users/_get/rs.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.OK_200)
 public class GetUsersMethod extends AbstractApiMethodV2 {

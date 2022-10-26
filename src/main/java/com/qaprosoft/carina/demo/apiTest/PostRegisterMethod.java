@@ -9,7 +9,7 @@ import com.qaprosoft.carina.core.foundation.api.http.HttpMethodType;
 import com.qaprosoft.carina.core.foundation.api.http.HttpResponseStatusType;
 import com.qaprosoft.carina.core.foundation.utils.Configuration;
 
-@Endpoint(url = "${base_url}/api/registers", methodType = HttpMethodType.POST)
+@Endpoint(url = "https://reqres.in/api/registers", methodType = HttpMethodType.POST)
 @RequestTemplatePath(path = "api/apiTest/registrations/_post/rq.json")
 @ResponseTemplatePath(path = "api/apiTest/registrations/_post/rs.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.CREATED_201)
