@@ -7,7 +7,15 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class ProductsMenu extends AbstractUIObject {
+    @FindBy(className = "inventory_item_name")
+    private ExtendedWebElement productName;
+
+    @FindBy(className = "inventory_item_price")
+    private ExtendedWebElement productPrice;
+
     @FindBy(xpath = "//*[@id=\"add-to-cart-sauce-labs-backpack\"]")
     private ExtendedWebElement addToCartButton;
 
@@ -19,6 +27,18 @@ public class ProductsMenu extends AbstractUIObject {
 
     @FindBy(xpath = "//*[@id=\"react-burger-menu-btn\"]")
     private ExtendedWebElement burgerButton;
+
+    @FindBy(xpath = "//*[@id=\"header_container\"]/div[2]/div[2]/span/select/option[1]")
+    private ExtendedWebElement nameAToZ;
+
+    @FindBy(xpath = "//*[@id=\"header_container\"]/div[2]/div[2]/span/select/option[2]")
+    private ExtendedWebElement nameZToA;
+
+    @FindBy(xpath = "//*[@id=\"header_container\"]/div[2]/div[2]/span/select/option[3]")
+    private ExtendedWebElement priceLowToHigh;
+
+    @FindBy(xpath = "//*[@id=\"header_container\"]/div[2]/div[2]/span/select/option[4]")
+    private ExtendedWebElement priceHighToLow;
 
     public ProductsMenu(WebDriver driver) {
         super(driver);
@@ -44,4 +64,27 @@ public class ProductsMenu extends AbstractUIObject {
         burgerButton.click();
     }
 
+    public void SortNameAToZ() {
+        nameAToZ.click();
+    }
+
+    public void SortNameZToA() {
+        nameZToA.click();
+    }
+
+    public void SortPriceLowToHigh() {
+        priceLowToHigh.click();
+    }
+
+    public void SortPriceHighToLow() {
+        priceHighToLow.click();
+    }
+
+    public ExtendedWebElement getProductName() {
+        return productName;
+    }
+
+    public ExtendedWebElement getProductPrice() {
+        return productPrice;
+    }
 }

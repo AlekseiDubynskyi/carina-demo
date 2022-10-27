@@ -8,6 +8,8 @@ import com.qaprosoft.carina.demo.gui.forTest.components.ProductsMenu;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class ProductsPage extends AbstractPage {
 
     @FindBy(id = "inventory_container")
@@ -21,6 +23,9 @@ public class ProductsPage extends AbstractPage {
 
     @FindBy(id = "menu_button_container")
     private BurgerButtonMenu burgerButtonMenu;
+
+    @FindBy(id = "inventory_container")
+    private List<ProductsMenu> productsList;
 
     public ProductsPage(WebDriver driver) {
         super(driver);
@@ -40,5 +45,9 @@ public class ProductsPage extends AbstractPage {
 
     public BurgerButtonMenu burgerButtonMenu() {
         return burgerButtonMenu;
+    }
+
+    public List<ProductsMenu> getProductsList() {
+        return productsList;
     }
 }
