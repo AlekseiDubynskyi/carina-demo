@@ -19,7 +19,7 @@ public class LoginMenu extends AbstractUIObject {
     @FindBy(xpath = "//*[@id=\"login-button\"]")
     private ExtendedWebElement loginButton;
 
-    @FindBy(xpath = "//*[@id=\"login_button_container\"]/div/form/div[3]/h3/text()")
+    @FindBy(xpath = "//*[@id=\"login_button_container\"]/div/form/div[3]/h3")
     private ExtendedWebElement errorMessage;
 
     public LoginMenu(WebDriver driver) {

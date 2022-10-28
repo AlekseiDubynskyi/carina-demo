@@ -10,7 +10,7 @@ public class ItemMenu extends AbstractUIObject {
     @FindBy(xpath = "//*[@id=\"inventory_item_container\"]/div/div/div[2]/div[1]")
     private ExtendedWebElement ItemName4;
 
-    @FindBy(xpath = "//*[@id=\"inventory_item_container\"]/div/div/div[2]/div[3]/text()[2]")
+    @FindBy(xpath = "//*[@id=\"inventory_item_container\"]/div/div/div[2]/div[3]")
     private ExtendedWebElement ItemPrice4;
 
     @FindBy(xpath = "//*[@id=\"back-to-products\"]")

@@ -5,6 +5,7 @@ import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import com.qaprosoft.carina.demo.gui.forTest.components.CartMenu;
 import com.qaprosoft.carina.demo.gui.forTest.components.LoginMenu;
 import com.qaprosoft.carina.demo.gui.forTest.components.ProductsMenu;
+import com.qaprosoft.carina.demo.gui.forTest.pages.CartPage;
 import com.qaprosoft.carina.demo.gui.forTest.pages.LoginPage;
 import com.qaprosoft.carina.demo.gui.forTest.pages.ProductsPage;
 import org.testng.Assert;
@@ -16,7 +17,7 @@ public class WebThirdTest implements IAbstractTest {
     private static final String CORRECT_USER = "standard_user";
     private static final String CORRECT_PASSWORD = "secret_sauce";
     private static final String PRODUCT_NAME = "Sauce Labs Backpack";
-    private static final String PRODUCT_PRICE = "29.99";
+    private static final String PRODUCT_PRICE = "$29.99";
     LoginPage loginPage = null;
 
     @BeforeSuite
@@ -43,7 +44,9 @@ public class WebThirdTest implements IAbstractTest {
 
         productsMenu.addProductToCart();
         productsMenu.openShoppingCartPage();
-        CartMenu cartMenu = productsPage.getCartMenu();
+
+        CartPage cartPage = new CartPage(getDriver());
+        CartMenu cartMenu = cartPage.getCartMenu();
 
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(cartMenu.readItemName4(), PRODUCT_NAME);

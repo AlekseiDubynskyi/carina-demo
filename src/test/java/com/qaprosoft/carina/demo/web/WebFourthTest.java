@@ -6,6 +6,7 @@ import com.qaprosoft.carina.demo.gui.forTest.components.BurgerButtonMenu;
 import com.qaprosoft.carina.demo.gui.forTest.components.ItemMenu;
 import com.qaprosoft.carina.demo.gui.forTest.components.LoginMenu;
 import com.qaprosoft.carina.demo.gui.forTest.components.ProductsMenu;
+import com.qaprosoft.carina.demo.gui.forTest.pages.ItemPage;
 import com.qaprosoft.carina.demo.gui.forTest.pages.LoginPage;
 import com.qaprosoft.carina.demo.gui.forTest.pages.ProductsPage;
 import org.testng.Assert;
@@ -17,7 +18,7 @@ public class WebFourthTest implements IAbstractTest {
     private static final String CORRECT_USER = "standard_user";
     private static final String CORRECT_PASSWORD = "secret_sauce";
     private static final String PRODUCT_NAME = "Sauce Labs Backpack";
-    private static final String PRODUCT_PRICE = "29.99";
+    private static final String PRODUCT_PRICE = "$29.99";
     LoginPage loginPage = null;
 
     @BeforeSuite
@@ -43,7 +44,9 @@ public class WebFourthTest implements IAbstractTest {
         Assert.assertTrue(productsMenu.isUIObjectPresent(2), "Products menu wasn't found!");
 
         productsMenu.openItem4Page();
-        ItemMenu itemMenu = productsPage.getItemMenu();
+
+        ItemPage itemPage = new ItemPage(getDriver());
+        ItemMenu itemMenu = itemPage.getItemMenu();
 
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(itemMenu.ItemName4(), PRODUCT_NAME);

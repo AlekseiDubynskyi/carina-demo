@@ -10,7 +10,7 @@ public class CartMenu extends AbstractUIObject {
     @FindBy(xpath = "//*[@id=\"item_4_title_link\"]/div")
     private ExtendedWebElement readItemName4;
 
-    @FindBy(xpath = "//*[@id=\"inventory_item_container\"]/div/div/div[2]/div[3]/text()[2]")
+    @FindBy(xpath = "//*[@id=\"cart_contents_container\"]/div/div[1]/div[3]/div[2]/div[2]/div")
     private ExtendedWebElement readItemPrice4;
 
     public CartMenu(WebDriver driver) {

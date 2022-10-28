@@ -15,12 +15,6 @@ public class ProductsPage extends AbstractPage {
     @FindBy(id = "inventory_container")
     private ProductsMenu productsMenu;
 
-    @FindBy(id = "cart_contents_container")
-    private CartMenu cartMenu;
-
-    @FindBy(id = "inventory_item_container")
-    private ItemMenu itemMenu;
-
     @FindBy(id = "menu_button_container")
     private BurgerButtonMenu burgerButtonMenu;
 
@@ -33,14 +27,6 @@ public class ProductsPage extends AbstractPage {
 
     public ProductsMenu getProductsMenu() {
         return productsMenu;
-    }
-
-    public CartMenu getCartMenu() {
-        return cartMenu;
-    }
-
-    public ItemMenu getItemMenu() {
-        return itemMenu;
     }
 
     public BurgerButtonMenu burgerButtonMenu() {
