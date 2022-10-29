@@ -7,11 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class ItemMenu extends AbstractUIObject {
-    @FindBy(xpath = "//*[@id=\"inventory_item_container\"]/div/div/div[2]/div[1]")
-    private ExtendedWebElement ItemName4;
+    @FindBy(xpath = "//*[@id=\"inventory_item_container\"]//div[@class=\"inventory_details_name large_size\"]")
+    private ExtendedWebElement itemName;
 
-    @FindBy(xpath = "//*[@id=\"inventory_item_container\"]/div/div/div[2]/div[3]")
-    private ExtendedWebElement ItemPrice4;
+    @FindBy(className = "inventory_details_price")
+    private ExtendedWebElement itemPrice;
 
     @FindBy(xpath = "//*[@id=\"back-to-products\"]")
     private ExtendedWebElement backToProductsButton;
@@ -24,17 +24,15 @@ public class ItemMenu extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public String ItemName4() {
-        assertElementPresent(ItemName4);
-        return ItemName4.getText();
+    public String getItemName() {
+        return itemName.getText();
     }
 
-    public String ItemPrice4() {
-        assertElementPresent(ItemPrice4);
-        return ItemPrice4.getText();
+    public String getItemPrice() {
+        return itemPrice.getText();
     }
 
-    public void backToProductsButton() {
+    public void clickBackToProductsButton() {
         backToProductsButton.click();
     }
 }

@@ -18,7 +18,7 @@ public class BurgerButtonMenu extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public void logout() {
-        logoutButton.click();
+    public void clickLogoutButton() {
+        logoutButton.click(3);
     }
 }

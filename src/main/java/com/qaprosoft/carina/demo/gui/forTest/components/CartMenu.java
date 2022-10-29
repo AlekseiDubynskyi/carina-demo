@@ -7,11 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class CartMenu extends AbstractUIObject {
-    @FindBy(xpath = "//*[@id=\"item_4_title_link\"]/div")
-    private ExtendedWebElement readItemName4;
+    @FindBy(className = "inventory_item_name")
+    private ExtendedWebElement readItemName;
 
-    @FindBy(xpath = "//*[@id=\"cart_contents_container\"]/div/div[1]/div[3]/div[2]/div[2]/div")
-    private ExtendedWebElement readItemPrice4;
+    @FindBy(className = "inventory_item_price")
+    private ExtendedWebElement readItemPrice;
 
     public CartMenu(WebDriver driver) {
         super(driver);
@@ -21,13 +21,11 @@ public class CartMenu extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public String readItemName4() {
-        assertElementPresent(readItemName4);
-        return readItemName4.getText();
+    public String getItemName() {
+        return readItemName.getText();
     }
 
-    public String readItemPrice4() {
-        assertElementPresent(readItemPrice4);
-        return readItemPrice4.getText();
+    public String getItemPrice() {
+        return readItemPrice.getText();
     }
 }

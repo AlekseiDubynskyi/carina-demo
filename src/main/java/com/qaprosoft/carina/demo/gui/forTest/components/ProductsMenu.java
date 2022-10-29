@@ -2,12 +2,14 @@ package com.qaprosoft.carina.demo.gui.forTest.components;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
-import com.qaprosoft.carina.demo.gui.forTest.pages.ProductsPage;
+import com.qaprosoft.carina.demo.gui.forTest.pages.CartPage;
+import com.qaprosoft.carina.demo.gui.forTest.pages.ItemPage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import javax.swing.text.Element;
 
 public class ProductsMenu extends AbstractUIObject {
     @FindBy(className = "inventory_item_name")
@@ -16,14 +18,14 @@ public class ProductsMenu extends AbstractUIObject {
     @FindBy(className = "inventory_item_price")
     private ExtendedWebElement productPrice;
 
-    @FindBy(xpath = "//*[@id=\"add-to-cart-sauce-labs-backpack\"]")
+    @FindBy(xpath = "//*[./*[./*[text() = '%s']]]/following-sibling::*/*[text() = 'Add to cart']")
     private ExtendedWebElement addToCartButton;
 
     @FindBy(xpath = "//*[@id=\"shopping_cart_container\"]")
     private ExtendedWebElement shoppingCartButton;
 
-    @FindBy(xpath = "//*[@id=\"item_4_title_link\"]/div")
-    private ExtendedWebElement item4Button;
+    @FindBy(xpath = "//*[text()='%s']")
+    private ExtendedWebElement itemNameButton;
 
     @FindBy(xpath = "//*[@id=\"react-burger-menu-btn\"]")
     private ExtendedWebElement burgerButton;
@@ -48,16 +50,18 @@ public class ProductsMenu extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public void addProductToCart() {
-        addToCartButton.click();
+    public void addProductToCart(String text) {
+        addToCartButton.format(text).click();
     }
 
-    public void openShoppingCartPage() {
+    public CartPage clickShoppingCartButton() {
         shoppingCartButton.click();
+        return new CartPage(driver);
     }
 
-    public void openItem4Page() {
-        item4Button.click();
+    public ItemPage openItemPage(String text) {
+        itemNameButton.format(text).click();
+        return new ItemPage(driver);
     }
 
     public void openOptions() {

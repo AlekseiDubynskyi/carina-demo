@@ -9,47 +9,40 @@ import com.qaprosoft.carina.demo.gui.forTest.pages.CartPage;
 import com.qaprosoft.carina.demo.gui.forTest.pages.LoginPage;
 import com.qaprosoft.carina.demo.gui.forTest.pages.ProductsPage;
 import org.testng.Assert;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class WebThirdTest implements IAbstractTest {
     private static final String CORRECT_USER = "standard_user";
     private static final String CORRECT_PASSWORD = "secret_sauce";
-    private static final String PRODUCT_NAME = "Sauce Labs Backpack";
-    private static final String PRODUCT_PRICE = "$29.99";
-    LoginPage loginPage = null;
+    private static final String PRODUCT_NAME = "Sauce Labs Bolt T-Shirt";
+    private static final String PRODUCT_PRICE = "$15.99";
 
-    @BeforeSuite
-    public void startDriver() {
-        loginPage = new LoginPage(getDriver());
-    }
-
-    @Test(description = "")
+    @Test(description = "Check the item in the cart")
     @MethodOwner(owner = "Dubynskyi Oleksii")
-    public void testLoggingInWithEmptyFields() {
+    public void CheckingAddingProductToCart() {
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.open();
         Assert.assertTrue(loginPage.isPageOpened(), "Login page was not opened!");
 
         LoginMenu loginMenu = loginPage.getLoginMenu();
         Assert.assertTrue(loginMenu.isUIObjectPresent(2), "Login menu wasn't found!");
 
-        loginMenu.sendCredentialToUsernameField(CORRECT_USER);
-        loginMenu.sendCredentialToPasswordField(CORRECT_PASSWORD);
+        loginMenu.typeUsername(CORRECT_USER);
+        loginMenu.typePassword(CORRECT_PASSWORD);
 
-        loginMenu.openProductsPage();
-        ProductsPage productsPage = new ProductsPage(getDriver());
+        ProductsPage productsPage = loginMenu.clickLoginButton();
         ProductsMenu productsMenu = productsPage.getProductsMenu();
         Assert.assertTrue(productsMenu.isUIObjectPresent(2), "Products menu wasn't found!");
 
-        productsMenu.addProductToCart();
-        productsMenu.openShoppingCartPage();
+        productsMenu.addProductToCart(PRODUCT_NAME);
 
-        CartPage cartPage = new CartPage(getDriver());
+        CartPage cartPage = productsMenu.clickShoppingCartButton();
         CartMenu cartMenu = cartPage.getCartMenu();
 
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(cartMenu.readItemName4(), PRODUCT_NAME);
-        softAssert.assertEquals(cartMenu.readItemPrice4(), PRODUCT_PRICE);
+        softAssert.assertEquals(cartMenu.getItemName(), PRODUCT_NAME, "Product name doesn't matches");
+        softAssert.assertEquals(cartMenu.getItemPrice(), PRODUCT_PRICE, "Product price doesn't matches");
+        softAssert.assertAll();
     }
 }

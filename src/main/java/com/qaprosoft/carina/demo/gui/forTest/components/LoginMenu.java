@@ -2,7 +2,6 @@ package com.qaprosoft.carina.demo.gui.forTest.components;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
-import com.qaprosoft.carina.demo.gui.forTest.pages.LoginPage;
 import com.qaprosoft.carina.demo.gui.forTest.pages.ProductsPage;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -30,23 +29,20 @@ public class LoginMenu extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public ProductsPage openProductsPage() {
+    public ProductsPage clickLoginButton() {
         loginButton.click();
         return new ProductsPage(driver);
     }
 
-    public String readErrorMessage() {
-        assertElementPresent(errorMessage);
+    public String getErrorMessage() {
         return errorMessage.getText();
     }
 
-    public void sendCredentialToUsernameField(String text) {
-        username.click();
+    public void typeUsername(String text) {
         username.type(text);
     }
 
-    public void sendCredentialToPasswordField(String text) {
-        password.click();
+    public void typePassword(String text) {
         password.type(text);
     }
 }
