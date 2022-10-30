@@ -1,5 +1,6 @@
 package com.qaprosoft.carina.demo.gui.forTest.pages;
 
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.demo.gui.forTest.components.BurgerButtonMenu;
 import com.qaprosoft.carina.demo.gui.forTest.components.CartMenu;
@@ -15,6 +16,9 @@ public class ProductsPage extends AbstractPage {
     @FindBy(id = "inventory_container")
     private ProductsMenu productsMenu;
 
+    @FindBy(xpath = "//*[@id=\"react-burger-menu-btn\"]")
+    private ExtendedWebElement burgerButton;
+
     @FindBy(id = "menu_button_container")
     private BurgerButtonMenu burgerButtonMenu;
 
@@ -27,6 +31,10 @@ public class ProductsPage extends AbstractPage {
 
     public ProductsMenu getProductsMenu() {
         return productsMenu;
+    }
+
+    public void openOptions() {
+        burgerButton.click();
     }
 
     public BurgerButtonMenu burgerButtonMenu() {

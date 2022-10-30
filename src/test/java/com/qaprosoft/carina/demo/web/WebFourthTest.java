@@ -45,7 +45,7 @@ public class WebFourthTest implements IAbstractTest {
         softAssert.assertAll();
 
         itemMenu.clickBackToProductsButton();
-        productsMenu.openOptions();
+        productsPage.openOptions();
 
         BurgerButtonMenu burgerButtonMenu = productsPage.burgerButtonMenu();
         burgerButtonMenu.clickLogoutButton();

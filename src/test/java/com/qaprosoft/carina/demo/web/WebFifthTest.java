@@ -8,8 +8,7 @@ import com.qaprosoft.carina.demo.gui.forTest.pages.LoginPage;
 import com.qaprosoft.carina.demo.gui.forTest.pages.ProductsPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.List;
+import org.testng.asserts.SoftAssert;
 
 public class WebFifthTest implements IAbstractTest {
     private static final String CORRECT_USER = "standard_user";
@@ -28,25 +27,25 @@ public class WebFifthTest implements IAbstractTest {
         loginMenu.typeUsername(CORRECT_USER);
         loginMenu.typePassword(CORRECT_PASSWORD);
 
-        loginMenu.clickLoginButton();
-        ProductsPage productsPage = new ProductsPage(getDriver());
+
+        ProductsPage productsPage = loginMenu.clickLoginButton();
         ProductsMenu productsMenu = productsPage.getProductsMenu();
         Assert.assertTrue(productsMenu.isUIObjectPresent(2), "Products menu wasn't found!");
 
-        productsMenu.SortNameAToZ();
-        List<ProductsMenu> sortNameAToZList = productsPage.getProductsList();
-        Assert.assertEquals(sortNameAToZList.get(0).getProductName().getText(), "Sauce Labs Backpack", "  ");
+        SoftAssert softAssert = new SoftAssert();
 
-        productsMenu.SortNameZToA();
-        List<ProductsMenu> sortNameZToAList = productsPage.getProductsList();
-        Assert.assertEquals(sortNameZToAList.get(0).getProductName().getText(), "Test.allTheThings() T-Shirt (Red)", "  ");
+        productsMenu.clickSortNameAToZ();
+        softAssert.assertTrue(productsMenu.isNamesSortedAToZ(), "Sorting by name from A to Z is incorrect");
 
-        productsMenu.SortPriceLowToHigh();
-        List<ProductsMenu> sortPriceLowToHigh = productsPage.getProductsList();
-        Assert.assertEquals(sortPriceLowToHigh.get(0).getProductPrice().getText(), "$7.99", "  ");
+        productsMenu.clickSortNameZToA();
+        softAssert.assertTrue(productsMenu.isNamesSortedZToA(), "Sorting by name from Z to A is incorrect");
 
-        productsMenu.SortPriceHighToLow();
-        List<ProductsMenu> sortPriceHighToLow = productsPage.getProductsList();
-        Assert.assertEquals(sortPriceHighToLow.get(0).getProductPrice().getText(), "$49.99", "  ");
+        productsMenu.clickSortPriceLowToHigh();
+        softAssert.assertTrue(productsMenu.isPricesSortedLowToHigh(), "Sorting by price from Low to High is incorrect");
+
+        productsMenu.clickSortPriceHighToLow();
+        softAssert.assertTrue(productsMenu.isPricesSortedHighToLow(), "Sorting by price from High to Low is incorrect");
+
+        softAssert.assertAll();
     }
 }

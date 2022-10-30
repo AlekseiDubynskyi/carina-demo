@@ -4,19 +4,21 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
 import com.qaprosoft.carina.demo.gui.forTest.pages.CartPage;
 import com.qaprosoft.carina.demo.gui.forTest.pages.ItemPage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-import javax.swing.text.Element;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductsMenu extends AbstractUIObject {
     @FindBy(className = "inventory_item_name")
-    private ExtendedWebElement productName;
+    private List<ExtendedWebElement> productNames;
 
     @FindBy(className = "inventory_item_price")
-    private ExtendedWebElement productPrice;
+    private List<ExtendedWebElement> productPrices;
 
     @FindBy(xpath = "//*[./*[./*[text() = '%s']]]/following-sibling::*/*[text() = 'Add to cart']")
     private ExtendedWebElement addToCartButton;
@@ -26,9 +28,6 @@ public class ProductsMenu extends AbstractUIObject {
 
     @FindBy(xpath = "//*[text()='%s']")
     private ExtendedWebElement itemNameButton;
-
-    @FindBy(xpath = "//*[@id=\"react-burger-menu-btn\"]")
-    private ExtendedWebElement burgerButton;
 
     @FindBy(xpath = "//*[@id=\"header_container\"]/div[2]/div[2]/span/select/option[1]")
     private ExtendedWebElement nameAToZ;
@@ -64,31 +63,68 @@ public class ProductsMenu extends AbstractUIObject {
         return new ItemPage(driver);
     }
 
-    public void openOptions() {
-        burgerButton.click();
-    }
-
-    public void SortNameAToZ() {
+    public void clickSortNameAToZ() {
         nameAToZ.click();
     }
 
-    public void SortNameZToA() {
+    public void clickSortNameZToA() {
         nameZToA.click();
     }
 
-    public void SortPriceLowToHigh() {
+    public void clickSortPriceLowToHigh() {
         priceLowToHigh.click();
     }
 
-    public void SortPriceHighToLow() {
+    public void clickSortPriceHighToLow() {
         priceHighToLow.click();
     }
 
-    public ExtendedWebElement getProductName() {
-        return productName;
+    public boolean isNamesSortedAToZ() {
+        List<String> nameList = new ArrayList<>();
+        for (ExtendedWebElement productName : productNames) {
+            nameList.add(productName.getText());
+        }
+
+        List<String> nameListSorted = nameList.stream().sorted().collect(Collectors.toList());
+
+        return nameList.equals(nameListSorted);
     }
 
-    public ExtendedWebElement getProductPrice() {
-        return productPrice;
+    public boolean isNamesSortedZToA() {
+        List<String> nameList = new ArrayList<>();
+        for (ExtendedWebElement productName : productNames) {
+            nameList.add(productName.getText());
+        }
+
+        List<String> nameListSorted = nameList.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+
+        return nameList.equals(nameListSorted);
+    }
+
+    public boolean isPricesSortedLowToHigh() {
+        List<Double> priceList = new ArrayList<>();
+        for (ExtendedWebElement productPrice : productPrices) {
+            priceList.add(Double.valueOf(productPrice.getText().replace("$", "")));
+        }
+
+        System.out.println(priceList);
+
+        List<Double> priceListSorted = priceList.stream().sorted().collect(Collectors.toList());
+
+        System.out.println(priceListSorted);
+
+        return priceList.equals(priceListSorted);
+    }
+
+    public boolean isPricesSortedHighToLow() {
+        List<Double> priceList = new ArrayList<>();
+        for (ExtendedWebElement productPrice : productPrices) {
+            priceList.add(Double.valueOf(productPrice.getText().replace("$", "")));
+        }
+
+        List<Double> priceListSorted = priceList.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+
+        return priceList.equals(priceListSorted);
     }
 }
+
